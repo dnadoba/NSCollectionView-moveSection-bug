@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +675,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CollectionView_moveSection" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -703,11 +705,60 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="CollectionView_moveSection" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6p4-eu-Pxv">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <clipView key="contentView" drawsBackground="NO" id="mYX-uy-7jH">
+                                    <rect key="frame" x="1" y="1" width="478" height="268"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView id="frc-jS-ul0">
+                                            <rect key="frame" x="0.0" y="0.0" width="478" height="158"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="cGt-VP-jRK">
+                                                <size key="itemSize" width="50" height="50"/>
+                                            </collectionViewFlowLayout>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </collectionView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="jaL-dC-F6o">
+                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="chb-wW-7la">
+                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Lf-DC-gb6">
+                                <rect key="frame" x="343" y="13" width="123" height="32"/>
+                                <buttonCell key="cell" type="push" title="Move Section" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="era-eH-Wpi">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="moveSection:" target="XfG-lQ-9wD" id="tup-qG-Zte"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1Lf-DC-gb6" secondAttribute="bottom" constant="20" id="ARh-Ra-evN"/>
+                            <constraint firstItem="6p4-eu-Pxv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="H7Y-TN-Fh5"/>
+                            <constraint firstAttribute="trailing" secondItem="6p4-eu-Pxv" secondAttribute="trailing" id="SRG-i8-kMU"/>
+                            <constraint firstAttribute="bottom" secondItem="6p4-eu-Pxv" secondAttribute="bottom" id="dMv-Ad-HBY"/>
+                            <constraint firstAttribute="trailing" secondItem="1Lf-DC-gb6" secondAttribute="trailing" constant="20" id="iyr-IQ-IKi"/>
+                            <constraint firstItem="6p4-eu-Pxv" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="l7F-Id-vmf"/>
+                            <constraint firstItem="1Lf-DC-gb6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="ulz-aW-x5p"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="frc-jS-ul0" id="Yaq-Pp-bOa"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
